@@ -7,7 +7,7 @@ include_directories(Trie)
 include_directories(Solve)
 
 add_executable(
-        1c
+        autocomplete
         main.cpp
         Trie/Trie.cpp
         Solve/Solve.cpp

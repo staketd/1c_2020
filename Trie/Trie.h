@@ -21,12 +21,12 @@ private:
     struct Node {
         Node();
 
-        std::map<char, Node*> children;
+        std::map<unsigned char, Node*> children;
         size_t terminal_count_;
         size_t max_word_count_;
         Node* max_word_node_;
         Node* parent_;
-        char parent_symbol_;
+        unsigned char parent_symbol_;
     };
     Node* root_;
     Node* last_request_;

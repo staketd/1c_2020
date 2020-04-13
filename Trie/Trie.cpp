@@ -1,8 +1,8 @@
 #include "Trie.h"
 #include <algorithm>
 
-bool isLetter(char c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+bool isLetter(unsigned char c) {
+    return c != ' ';
 }
 
 void Trie::AddWord(const std::string& s) {
@@ -10,7 +10,7 @@ void Trie::AddWord(const std::string& s) {
         return;
     }
     Node* now = root_;
-    for (auto& c: s) {
+    for (unsigned char c: s) {
         if (now->children[c] == nullptr) {
             now->children[c] = new Node();
             now->children[c]->parent_ = now;
@@ -61,7 +61,7 @@ void Trie::Request(const std::string& word) {
 
 std::string Trie::GetCompletion() {
     if (last_request_ == nullptr) {
-        return "No such words";
+        return std::string();
     }
     Node* word = last_request_->max_word_node_;
     std::string result;
@@ -74,7 +74,7 @@ std::string Trie::GetCompletion() {
 }
 
 void Trie::AddToPreviousRequest(const std::string& word) {
-    for (const auto& c: word) {
+    for (unsigned char c: word) {
         if (last_request_ == nullptr) {
             return;
         }
